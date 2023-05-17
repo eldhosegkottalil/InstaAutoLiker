@@ -1,7 +1,7 @@
 var counter = 0;   // current number of liked posts
 var totalLikes = 120;  // number of likes you want, recommended is not more than 200 per day.
 var likeButtonClassName = '_aamw';  // This is the class name of the "heart shape" element on Instagram. If the code isn't working, check the class name by inspecting the element. Instagram usually changes it.
-var scrollYAxisBy = 2000;   // This scrolls the Y-axis by 2000 pixels. You can change it accordingly.
+var scrollYAxisBy = 3000;   // This scrolls the Y-axis by 2000 pixels. You can change it accordingly.
 var desiredDuration = 2 * 60 * 60 * 1000;  // Desired duration in milliseconds (e.g., 2 hours)
 var refreshDelay = 30 * 60 * 1000;  // Delay in milliseconds before refreshing the page and running the script again (e.g., 30 minutes)
 
