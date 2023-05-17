@@ -37,17 +37,17 @@ function likeInsta() {
 			let wait = Math.floor(desiredDuration / totalLikes);
 			console.log('Slept for ' + (wait / 1000) + " seconds");
 			setTimeout(function () {
-				console.log('Refreshing the page...');
-				location.reload();
-			}, refreshDelay);
+				console.log('Called function again');
+				likeInsta();
+			}, wait);
 		}
 	} else {
 		window.scrollBy(0, scrollYAxisBy);
 		let wait = Math.floor(desiredDuration / totalLikes);
 		console.log('Slept for ' + (wait / 1000) + " seconds");
 		setTimeout(function () {
-			console.log('Refreshing the page...');
-			location.reload();
+			console.log('Called function again as no new post to like');
+			likeInsta();
 		}, Math.floor((Math.random() * 3000) + wait));
 	}
 }
