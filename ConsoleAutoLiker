@@ -1,0 +1,55 @@
+var counter = 0;   // current number of liked posts
+var totalLikes = 75;  // number of likes you want, recommended is not more than 200 per day.
+var likeButtonClassName = '_aamw';  // This is the class name of the "heart shape" element on Instagram. If the code isn't working, check the class name by inspecting the element. Instagram usually changes it.
+var scrollYAxisBy = 2000;   // This scrolls the Y-axis by 2000 pixels. You can change it accordingly.
+var desiredDuration = 12 * 60 * 60 * 1000;  // Desired duration in milliseconds (e.g., 12 hours)
+var refreshDelay = 30 * 60 * 1000;  // Delay in milliseconds before refreshing the page and running the script again (e.g., 30 minutes)
+
+
+function likeInsta() {
+	if (counter >= totalLikes) {
+		console.log("Liked " + totalLikes + " posts. I am done!");
+		return;
+	}
+	let i = 0;
+	let HTMLElementArray = document.getElementsByClassName(likeButtonClassName);
+	let arr = Array.from(HTMLElementArray);
+	if (arr.length != 0) {		// Condition is true if it finds the like element
+		for (i = 0; i < arr.length; i++) {
+			if (counter == totalLikes) {
+				console.log("Liked " + totalLikes + " posts. I am done!");
+				break;
+			}
+			let buttonChild = arr[i].firstChild;
+			let svgChild = buttonChild.firstChild.firstChild;
+			if (svgChild.nodeName == "svg") {
+				if (svgChild.getAttributeNode('aria-label').value = "Like") {
+					buttonChild.click();
+					counter++;
+					console.log('Total liked posts: ' + counter);
+				} else {
+					console.log('Post Already Liked');
+				}
+			}
+		}
+		if (i == arr.length) {                  // Enters here if all current visible posts are liked
+			window.scrollBy(0, scrollYAxisBy);
+			let wait = Math.floor(desiredDuration / totalLikes);
+			console.log('Slept for ' + (wait / 1000) + " seconds");
+			setTimeout(function () {
+				console.log('Refreshing the page...');
+				location.reload();
+			}, refreshDelay);
+		}
+	} else {
+		window.scrollBy(0, scrollYAxisBy);
+		let wait = Math.floor(desiredDuration / totalLikes);
+		console.log('Slept for ' + (wait / 1000) + " seconds");
+		setTimeout(function () {
+			console.log('Refreshing the page...');
+			location.reload();
+		}, Math.floor((Math.random() * 3000) + wait));
+	}
+}
+
+likeInsta();
